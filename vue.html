@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-observe-visibility/dist/vue-observe-visibility.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div v-for="(item,index) in arr" :key="item.index"><input v-model="item.age"></input>{{item.age}}</div>
+      <button @click="addData">增加数据</button>
+      <button @click="update">修改数据</button>
+      <div v-observe-visibility="visibilityChanged"></div>
+    </div>
+    <script type="module">
+      // 关闭提示
+      Vue.config.productionTip = false
+      // 目的暂时不明，应该是为了控台看见开发者工具
+      Vue.config.devtools = true;
+      Vue.use(VueObserveVisibility)
+      Vue.directive('observe-visibility', VueObserveVisibility.ObserveVisibility)
+      new Vue({
+        // template: '<div>{{ hi }}</div>',
+        // render(h) {
+        //   return h('h1', this.hi)
+        // },
+        el: '#app',
+        data: {
+          hi: '你好',
+          arr: []
+        },
+        methods: {
+          addData() {
+            this.arr.push({ name: '你好', index: 1 })
+            this.$set(this.arr[0],'age',19)
+          },
+          update(){
+            console.log(this.arr)
+          },
+          visibilityChanged (isVisible, entry) {
+          this.isVisible = isVisible
+          console.log(entry)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

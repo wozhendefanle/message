@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+<body>
+  <div class="text" style="width:100px">
+    www.text-dwadasda-caom
+    <img src="./images/BlackAndRedFloatingRobot.obj" alt="">
+      <input type="file" accept=".obj" class="objFile">
+      <input type="submit" value="提交">
+  </div>
+  <script>
+    const objFile = document.getElementsByClassName('objFile')[0]
+    objFile.addEventListener('input',function(){
+      console.dir(objFile.files[0])
+      const form = new FormData
+      form.append('file',objFile.files[0])
+      form.append('11','22')
+      console.log(form.get('file'))
+    })
+    
+  </script>
+</body>
+</html>
